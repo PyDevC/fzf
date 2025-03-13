@@ -10,8 +10,8 @@ source $PERSONAL/env
 #  source $link
 #done
 
-export CC="clang-12"
-export CXX="clang++-12"
+export CC="gcc"
+export CCL="clang-12" # changing cause many programs use CC=gcc
 export GIT_EDITOR=$VIM
 export DOTFILES=$HOME/.dot
 export EDITOR=$VIM
@@ -26,3 +26,4 @@ alias cds='cd $(fuzzy dir)'
 alias cdf='cd $(fuzzy file)'
 
 alias penv='. $(find ~/personal/env/python -mindepth 1 -maxdepth 1 -type d | fzf)/bin/activate'
+# TODO: I just want to see the dir name not full path
