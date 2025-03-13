@@ -16,6 +16,9 @@ map({"i","c"}, "jk", "<Esc>")
 
 map({"n", "v"}, "<leader>y", [["+y]])
 
+-- tmux-sessionizer
+map("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+
 -- move line up and down
 map("v", "<leader>j", ":m '>+1<CR>gv=gv")
 map("v", "<leader>k", ":m '>-2<CR>gv=gv")
