@@ -1,8 +1,6 @@
 vim.opt.guicursor = ""
 
 
-
-vim.g.python3_host_prog = os.getenv("~/personal/env/python")
 vim.opt.autoindent = true
 vim.opt.backup = false
 vim.opt.clipboard = "unnamed"

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# warning dangerous commnad used to remove whole repo
+
+if [[ -d "$1/.git" ]];then
+    exit 0
+fi
+
+read -q "Do you want to delete $1: [y/N]" act
+if [[ $act == y || $act == Y ]];then
+    sudo rm -r $1
+fi

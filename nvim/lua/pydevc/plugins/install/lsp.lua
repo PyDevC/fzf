@@ -81,17 +81,6 @@ return {
                 lua = true,
             }
 
-            -- python env setup
-            local util = require("lspconfig/util")
-            local path = util.path
-            require("lspconfig").pyright.setup({
-                on_attach = on_attach,
-                capabilities = capabilities,
-                before_init = function(_, config)
-                    default_env = path.join(vim.env.HOME, "personal", "env", "python", "ml", "bin", "python")
-                    config.settings.python.pythonPath = default_env
-                end
-            })
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(args)
                     local bufnr = args.buf

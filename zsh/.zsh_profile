@@ -3,22 +3,21 @@ VIM="nvim"
 PERSONAL=$HOME/personal
 
 export XDG_CONFIG_HOME=$HOME/.config
-export XDG_CONFIG_DIR=$PERSONAL/configs
 source $PERSONAL/env
-
-#for link in `find -L $XDG_CONFIG_DIR`; do
-#  source $link
-#done
 
 export CC="gcc"
 export CCL="clang-12" # changing cause many programs use CC=gcc
 export GIT_EDITOR=$VIM
 export DOTFILES=$HOME/.dot
+export DEV_ENV=$HOME/build_desktop
 export EDITOR=$VIM
 
 validateYaml() {
     python -c 'import yaml,sys;yaml.safe_load(sys.stdin)' < $1
 }
+
+bindkey -s ^f "tmux-sessionizer\n"
+bindkey -s ^a "tmux attach\n"
 
 # Alias
 alias cdd='cd $(fuzzy dir ~/personal)'
