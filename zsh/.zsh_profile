@@ -1,0 +1,28 @@
+VIM="nvim"
+
+PERSONAL=$HOME/personal
+
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CONFIG_DIR=$PERSONAL/configs
+source $PERSONAL/env
+
+#for link in `find -L $XDG_CONFIG_DIR`; do
+#  source $link
+#done
+
+export CC="clang-12"
+export CXX="clang++-12"
+export GIT_EDITOR=$VIM
+export DOTFILES=$HOME/.dot
+export EDITOR=$VIM
+
+validateYaml() {
+    python -c 'import yaml,sys;yaml.safe_load(sys.stdin)' < $1
+}
+
+# Alias
+alias cdd='cd $(fuzzy dir ~/personal)'
+alias cds='cd $(fuzzy dir)'
+alias cdf='cd $(fuzzy file)'
+
+alias penv='. $(find ~/personal/env/python -mindepth 1 -maxdepth 1 -type d | fzf)/bin/activate'

@@ -1,0 +1,94 @@
+#!/bin/bash
+
+# OPT_LOCATION Location where mv cp will be moved to 
+if [[ $OPT_LOCATION == "" ]]; then
+    export OPT_LOCATION=$HOME
+fi
+
+search_location(){ # searches for the location for find function
+    local location=$HOME
+    if [[ $# -gt 0 ]]; then
+        location=$1
+    fi
+    echo $location
+}
+
+select_location(){ # used to select OPT_LOCATION using fzf
+    local selected
+    if [[ $1 == "" || $OPT_LOCATION == "" ]]; then
+        selected=$(find `search_location` | fzf +m --height 50% --style full --input-label ' Destination ' --preview 'tree -C {}')
+        OPT_LOCATION=$selected
+        echo destination is saved
+    elif [[ $# -gt 0 ]]; then
+        OPT_LOCATION=$1
+    fi
+}
+
+dir(){ # searches for directories
+    local selected_dir
+    selected_dir=$(find `search_location $1` -type d | fzf +m --height 50% --preview 'tree -C {}')
+    echo $selected_dir
+}
+
+file(){ # searchers for files
+    local selected_file
+    selected_file=$(find `search_location $1` -type f | fzf +m --height 50% --preview 'tree -C {}')
+    echo `dirname $selected_file` 
+}
+
+remove(){
+    # searches for both files and directories
+    local selected
+    selected=$(find `search_location $1` | fzf +m --height 50% --preview 'tree -C {}')
+
+    if [[ $1 == "--forced" ]]; then
+        rm -r $selected
+    else
+        mv $selected $S_TRASH 
+        # S_TRASH is a system var which stores location of secondary trash folder
+    fi
+}
+
+move(){
+    local selected
+    selected=$(find `search_location` | fzf +m --height 50% --style full --input-label ' Source ' --preview 'tree -C {}')
+    select_location $1
+    if [[ -d $selected ]]; then
+        mv -r $selected $OPT_LOCATION
+    else
+        mv $selected $OPT_LOCATION
+    fi
+}
+
+copy(){ # fix move and copy
+    local selected
+    selected=$(find `search_location` | fzf +m --height 50% --style full --input-label ' Source ' --preview 'tree -C {}')
+    select_location $1
+    if [[ -d $selected ]]; then
+        cp -r $selected $OPT_LOCATION
+    else
+        cp $selected $OPT_LOCATION
+    fi
+}
+
+case $1 in 
+    "dir")
+        dir $2;;
+    "file")
+        file $2;;
+    "rm")
+        remove $2;;
+    "mv")
+        move $2;;
+    "cp")
+        copy $2;;
+    *)
+        echo "command not found"
+esac
+
+export OPT_LOCATION=$OPT_LOCATION
+# you can add alias to .bashrc or any other for
+# alias cdd='cd $(fuzzy dir ~/personal)'
+# alias cds='cd $(fuzzy dir)'
+# alias cdf='cd $(fuzzy file)'
+# requires fzf version 0.58
