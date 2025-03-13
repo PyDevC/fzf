@@ -10,7 +10,6 @@ end
 -- map("n", "<leader>pv", vim.cmd.Ex) -- stay just in case i delete oil.lua
 map({"i","c"}, "jk", "<Esc>")
 
-map("n", "<leader>q", "<CMD>q<CR>")
 -- Basic commands
 --map("n", "<leader>w", "<CMD>w<CR>")
 -- I am removing this habit but you can keep it. Just uncomment the above two lines
