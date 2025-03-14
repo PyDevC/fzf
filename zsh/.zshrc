@@ -105,9 +105,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 #Export bin
-export PATH="/home/d/bin:$PATH"
-
-o=`find .`
+export PATH="$HOME/bin:$PATH"
 
 . ~/.zsh_profile
 
