@@ -1,0 +1,94 @@
+;; Quick notes about the kanata configuration syntax:
+;;  - the syntax is Lisp-like but totally unrelated to Lisp, so no worries :-)
+;;  - comments are prefixed by double-semicolons
+;;  - only one `defsrc` is allowed, listing all keys handled by kanata
+;;  - up to 25 `deflayer` are allowed, one per layer emulation
+;;  - the underscore symbol `_` in `deflayer` sections means "transparent",
+;;    i.e. the previous layer behaviour is used when pressing that key
+
+;; `defsrc` defines the keys that will be intercepted by kanata.
+;; The order of the keys matches with deflayer declarations and all deflayer
+;; declarations must have the same number of keys as defsrc. Any keys not listed
+;; in defsrc will be passed straight to the operating system.
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+;; Base layer (active by default when kanata starts up):
+;;  - the 3 main thumb keys become mod/taps
+;;  - home-row mods on SDF and JKL
+;;  - CapsLock becomes Escape
+(deflayer qwerty
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  esc  _    @ss  @dd  @ff  _    _    @jj  @kk  @ll  _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    @sft           @nav           @alt _    _
+)
+
+;; Numpad layer
+;; Fine for playing Sudoku; debatable otherwise.
+(deflayer numpad
+  @std _    _    _    _    _    _    7    8    9    _    _    _    _
+  _    _    home up   end  pgup _    4    5    6    _    _    _    _
+  _    _    lft  down rght pgdn _    1    2    3    _    _    _
+  _    _    _    _    _    _    _    0    ,    .    _    _
+  _    _    _              _              _    _    _
+)
+
+;; Navigation layer:
+;;  - right: Vim-like arrows on HJKL, home/end page up/down, mouse scroll
+;;  - left: one-hand shortcuts (Ctrl-WASZXCV), Tab/Shift-Tab, prev/next
+;;  - up: Super-num (i3/sway) or Alt-num (browser), zoom in/out
+;; The `lrld` action stands for "live reload". This will re-parse everything
+;; except for linux-dev, i.e. you cannot live reload and switch keyboard devices.
+(deflayer vimnav
+  @num M-1  M-2  M-3  M-4  M-5  M-6  M-7  M-8  M-9  M-0  C--  C-=  lrld
+  _    _    C-w  bck  fwd  _    home pgdn pgup end  _    _    _    _
+  caps C-a  C-s S-tab tab  _    lft  down up   rght _    _    _
+  _    C-z  C-x  C-c  C-v  _    @mwl @mwd @mwu @mwr _    _
+  _    _    del            _              esc  _    _
+)
+
+;; `defalias` is used to declare a shortcut for a more complicated action to keep
+;; the deflayer declarations clean and aligned. The alignment in deflayers is
+;; not necessary, but is highly recommended for ease of understanding visually.
+;; Aliases are referred to by `@<alias_name>`.
+(defalias
+  ;; tap: backtick (grave), hold: toggle layer-switching layer while held
+  ;; grl (tap-hold 200 200 grv (layer-toggle layers))
+
+  ;; layer-switch changes the base layer.
+  std (layer-switch qwerty)
+  num (layer-switch numpad)
+
+  ;; Main mod-tap: VimNav layer when hold, Space when tapped.
+  ;; The space key must be hold long enough (200ms) to become a layer shift.
+  nav (tap-hold 200 200 spc (layer-toggle vimnav))
+
+  ;; Space-cadet thumb keys: Shift/BackSpace, AltGr/Return
+  ;;  - acts as a modifier by default, or as BS/Ret when tapped separately;
+  ;;  - works great with Qwerty-Lafayette and Ergo-L keyboard layouts, where
+  ;;    neither Shift nor AltGr are used outside of the 3×10 main alpha keys.
+  sft (tap-hold-press 200 200 bspc lsft)
+  alt (tap-hold-press 200 200 ret ralt)
+
+  ;; Home-row mods
+  ;; Must be hold long enough (200ms) to become a modifier.
+  ss (tap-hold 200 200 s lmet)
+  dd (tap-hold 200 200 d lalt)
+  ff (tap-hold 200 200 f lctl)
+  jj (tap-hold 200 200 j rctl)
+  kk (tap-hold 200 200 k lalt)
+  ll (tap-hold 200 200 l rmet)
+
+  ;; Mouse wheel emulation
+  mwu (mwheel-up    50 120)
+  mwd (mwheel-down  50 120)
+  mwl (mwheel-left  50 120)
+  mwr (mwheel-right 50 120)
+)

@@ -106,6 +106,7 @@ source $ZSH/oh-my-zsh.sh
 
 #Export bin
 export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 . ~/.zsh_profile
 
