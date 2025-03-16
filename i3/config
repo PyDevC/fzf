@@ -27,7 +27,7 @@ for_window [class="^.*"] client.focused          #77dd77 #285577 #ffffff #2e9ef4
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec gnome-terminal
+bindsym $mod+Return exec "gnome-terminal"
 
 bindsym $mod+Shift+q kill
 
@@ -86,6 +86,14 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
+
+# i3 automatic statup
+exec --no-startup-id i3-msg 'workspace 1; exec nautilus'
+exec --no-startup-id i3-msg 'workspace 2; exec gnome-terminal'
+exec --no-startup-id i3-msg 'workspace 3; exec firefox'
+exec --no-startup-id i3-msg 'workspace 4; exec firefox'
+exec --no-startup-id i3-msg 'workspace 5; exec firefox'
+exec --no-startup-id i3-msg 'workspace 6; exec gnome-system-monitor'
 
 # # switch to workspace
 bindsym $mod+1 workspace 1
@@ -194,32 +202,3 @@ bar {
         tray_output primary
 }
 
-# ------------------------------------------
-# CUSTOM KEYS START
-# ------------------------------------------
-exec --no-startup-id nm-applet
-
-# FKeys
-# Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
-#
-# # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
-
-# Alsa audio controls.
-bindsym $mod+Shift+comma exec ~/.config/i3/scripts/alsa restore
-bindsym $mod+semicolon exec ~/.config/i3/scripts/alsa down Headphone
-bindsym $mod+comma exec ~/.config/i3/scripts/alsa up Headphone
-bindsym $mod+m move workspace to output left
-
-# Suspend
-bindsym $mod+Shift+period exec systemctl suspend
-
-
-# Stream Management
-bindsym $mod+Shift+period exec systemctl suspend
-
-bindsym $mod+Shift+p exec --no-startup-id ~/.local/apps/play_next_bits

@@ -4,24 +4,58 @@
 )
 
 (defsrc
-  a s d f j k l ;
+q w e r t y u i o p 
+caps lsft rsft a s d f g h j k l ;
+z x c v b n m , .
 )
 (defvar
-  tap-time 150
+  tap-time 200
   hold-time 200
 )
 
 (defalias
-  a (multi f24 (tap-hold $tap-time $hold-time a lmet))
-  s (multi f24 (tap-hold $tap-time $hold-time s lalt))
-  d (multi f24 (tap-hold $tap-time $hold-time d lsft))
-  f (multi f24 (tap-hold $tap-time $hold-time f lctl))
-  j (multi f24 (tap-hold $tap-time $hold-time j rctl))
-  k (multi f24 (tap-hold $tap-time $hold-time k rsft))
-  l (multi f24 (tap-hold $tap-time $hold-time l ralt))
-  ; (multi f24 (tap-hold $tap-time $hold-time ; rmet))
+numlay (layer-switch num_mod) ;; switch to num layer
+norlay (layer-switch home_row) ;; switch to normal layer
+arrowlay (layer-switch arrow_mod) ;; switch to arrow layer
+
+;; home row mods
+  a (tap-hold $tap-time $hold-time a lmet)
+  s (tap-hold $tap-time $hold-time s lalt)
+  d (tap-hold $tap-time $hold-time d lsft)
+  f (tap-hold $tap-time $hold-time f lctl)
+  j (tap-hold $tap-time $hold-time j rctl)
+  k (tap-hold $tap-time $hold-time k rsft)
+  l (tap-hold $tap-time $hold-time l ralt)
+  ; (tap-hold $tap-time $hold-time ; rmet)
+;; num row mods
+  na (tap-hold $tap-time $hold-time 1 lmet)
+  ns (tap-hold $tap-time $hold-time 2 lalt)
+  nd (tap-hold $tap-time $hold-time 3 lsft)
+  nf (tap-hold $tap-time $hold-time 4 lctl)
+  nj (tap-hold $tap-time $hold-time 7 rctl)
+  nk (tap-hold $tap-time $hold-time 8 rsft)
+  nl (tap-hold $tap-time $hold-time 9 ralt)
+  nn (tap-hold $tap-time $hold-time 0 rmet)
+;; configure the switch buttons these are same for every layer
+  nlay (tap-hold 10 20 esc @numlay)
+  olay (tap-hold 1 20 _ @norlay)
+  alay (tap-hold 1 20 _ @arrowlay)
 )
 
-(deflayer base
-  @a @s @d @f @j @k @l @;
+(deflayer home_row
+q w e r t y u i o p 
+@nlay @olay @alay @a @s @d @f _ _ @j @k @l @;
+z x c v b n m , .
+)
+
+(deflayer num_mod
+q w e r t y u i o p 
+@nlay @olay @alay @na @ns @nd @nf 5 6 @nj @nk @nl @nn
+- + \ [ ] { } ` /
+)
+
+(deflayer arrow_mod
+q w e r t y u i o p 
+@nlay @olay @alay @a @s @d @f _ _ @j @k @l @;
+z x c v b n m , .
 )
