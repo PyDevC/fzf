@@ -8,7 +8,7 @@ local function map(mode, lhs, rhs, opt)
 end
 
 -- map("n", "<leader>pv", vim.cmd.Ex) -- stay just in case i delete oil.lua
-map({"i","c"}, "jk", "<Esc>")
+map({"i","c"}, "<C-c>", "<Esc>") -- changed my keybord keymappings to home row mod
 
 -- Basic commands
 --map("n", "<leader>w", "<CMD>w<CR>")
