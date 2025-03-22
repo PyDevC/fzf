@@ -81,6 +81,15 @@ return {
                 lua = true,
             }
 
+            vim.diagnostic.config({
+                virtual_text = true,
+                signs = true,
+                update_in_insert = false,
+                underline = true,
+                severity_sort = false,
+                float = true,
+            })
+
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(args)
                     local bufnr = args.buf
