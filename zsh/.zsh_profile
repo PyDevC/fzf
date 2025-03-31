@@ -11,9 +11,23 @@ export DOTFILES=$HOME/.dot
 export DEV_ENV=$HOME/build_desktop
 export EDITOR=$VIM
 
+addToPath() {
+    if [[ "$PATH" != *"$1"* ]]; then
+        export PATH=$PATH:$1
+    fi
+}
+
+addToPathFront() {
+    if [[ ! -z "$2" ]] || [[ "$PATH" != *"$1"* ]]; then
+        export PATH=$1:$PATH
+    fi
+}
+
 validateYaml() {
     python -c 'import yaml,sys;yaml.safe_load(sys.stdin)' < $1
 }
+
+addToPathFront $HOME/.dot/bin
 
 bindkey -s ^f "tmux-sessionizer\n"
 bindkey -s ^a "tmux attach\n"
