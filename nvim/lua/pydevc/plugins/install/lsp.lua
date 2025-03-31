@@ -91,27 +91,18 @@ return {
             })
 
             vim.api.nvim_create_autocmd("LspAttach", {
-                callback = function(args)
-                    local bufnr = args.buf
-                    local client = assert(vim.lsp.get_client_by_id(args.data.client_id), "must have valid client")
-
-                    vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
-
-                    vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
-                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0 })
-                    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = 0 })
-                    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = 0 })
-                    vim.keymap.set("n", "go", vim.lsp.buf.type_definition, { buffer = 0 })
-                    vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = 0 })
-                    vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { buffer = 0 })
-                    vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, { buffer = 0 })
+                callback = function(e)
+                    local opts = { buffer = e.buf }
+                    vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+                    vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+                    vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
+                    vim.keymap.set("n", "<leader>dt", function() vim.diagnostic.open_float() end, opts) -- extremly useful in diagnostics
+                    vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
+                    vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
+                    vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
+                    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
                     vim.keymap.set({ "n", "x" }, "<leader>f", vim.lsp.buf.format, { buffer = 0 })
-                    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = 0 })
-                    local filetype = vim.bo[bufnr].filetype
-                    if disable_semantic_tokens[filetype] then
-                        client.server_capabilities.semanticTokensProvider = nil
-                    end
-                end,
+                end
             })
         end,
     },
