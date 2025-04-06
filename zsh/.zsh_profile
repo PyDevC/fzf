@@ -28,6 +28,7 @@ validateYaml() {
 }
 
 addToPathFront $HOME/.dot/bin
+addToPathFront $HOME/build_desktop/
 
 bindkey -s ^f "tmux-sessionizer\n"
 bindkey -s ^a "tmux attach\n"
