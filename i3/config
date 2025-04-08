@@ -10,7 +10,6 @@ bindsym Mod4+Mod1+q [class=".*"] kill
 # Thanks Childz
 for_window [class=".*"] border pixel 1
 # class                 border  backgr. text    indicator child_border
-for_window [class="^.*"] client.focused          #77dd77 #285577 #ffffff #2e9ef4   #285577
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -30,8 +29,6 @@ floating_modifier $mod
 exec --no-startup-id hsetroot -center ~/.wallpaper.jpg
 # picom
 exec --no-startup-id picom
-# custom keybindings startup
-exec --no-startup-id kanata --cfg kanata/kanata.kbd
 
 # start a terminal
 bindsym $mod+Return exec "gnome-terminal"
@@ -41,6 +38,9 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+d exec rofi -show run
+bindsym $mod+c exec ~/.dot/rofi/rofi-wifi-menu.sh
+
+# screenshot with maim
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -96,11 +96,12 @@ bindsym $mod+a focus parent
 
 # i3 automatic statup
 exec --no-startup-id i3-msg 'workspace 1; exec nautilus'
-exec --no-startup-id i3-msg 'workspace 2; exec gnome-terminal'
-exec --no-startup-id i3-msg 'workspace 3; exec firefox -P "pytorch"'
-exec --no-startup-id i3-msg 'workspace 4; exec firefox -P "normal"'
-exec --no-startup-id i3-msg 'workspace 5; exec firefox -P "work"'
-exec --no-startup-id i3-msg 'workspace 6; exec gnome-system-monitor'
+exec --no-startup-id i3-msg 'workspace 2; exec firefox -P "normal"'
+exec --no-startup-id i3-msg 'workspace 4; exec gnome-terminal'
+exec --no-startup-id i3-msg 'workspace 5; exec gnome-system-monitor'
+
+exec --no-startup-id i3-msg 'workspace 7; exec firefox -P "work"'
+exec --no-startup-id i3-msg 'workspace 8; exec firefox -P "pytorch"'
 
 # # switch to workspace
 bindsym $mod+1 workspace 1
@@ -208,4 +209,3 @@ bar {
         status_command i3status
         tray_output primary
 }
-
