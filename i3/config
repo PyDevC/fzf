@@ -31,7 +31,7 @@ exec --no-startup-id hsetroot -center ~/.wallpaper.jpg
 exec --no-startup-id picom
 
 # start a terminal
-bindsym $mod+Return exec "gnome-terminal"
+bindsym $mod+Return exec "kitty"
 
 bindsym $mod+Shift+q kill
 
@@ -97,7 +97,7 @@ bindsym $mod+a focus parent
 # i3 automatic statup
 exec --no-startup-id i3-msg 'workspace 1; exec nautilus'
 exec --no-startup-id i3-msg 'workspace 2; exec firefox -P "normal"'
-exec --no-startup-id i3-msg 'workspace 4; exec gnome-terminal'
+exec --no-startup-id i3-msg 'workspace 4; exec kitty'
 exec --no-startup-id i3-msg 'workspace 5; exec gnome-system-monitor'
 
 exec --no-startup-id i3-msg 'workspace 7; exec firefox -P "work"'

@@ -28,6 +28,7 @@ numtog (layer-toggle num_mod)
   k (tap-hold $tap-time $hold-time k rsft)
   l (tap-hold $tap-time $hold-time l ralt)
   ; (tap-hold 100 $hold-time ; @numtog)
+
 ;; num row mods
   na (tap-hold $tap-time $hold-time 1 lmet)
   ns (tap-hold $tap-time $hold-time 2 lalt)
@@ -37,6 +38,7 @@ numtog (layer-toggle num_mod)
   nk (tap-hold $tap-time $hold-time 8 rsft)
   nl (tap-hold $tap-time $hold-time 9 ralt)
   nn (tap-hold $tap-time $hold-time 0 @numtog)
+
 ;; configure the switch buttons these are same for every layer
   nlay (tap-hold 10 20 esc @numlay)
   olay (tap-hold 1 20 _ @norlay)
