@@ -37,6 +37,7 @@ bindkey -s ^a "tmux attach\n"
 alias cdd='cd $(fuzzy dir ~/personal)'
 alias cds='cd $(fuzzy dir)'
 alias cdf='cd $(fuzzy file)'
+alias gfzf='git_fzf'
 
 
 alias penv='. $(find ~/personal/env/python -mindepth 1 -maxdepth 1 -type d | fzf)/bin/activate'

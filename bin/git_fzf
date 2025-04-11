@@ -24,10 +24,14 @@ git_fnc(){
 }
 
 repo=`repo_selection $HOME`
-cmd=`git_fnc`
+cmd="cmd"
 
-if [[ -z "$repo" || -z "$cmd" ]]; then
-    exit 0
-fi
+while [ ! -z "$cmd" ]; do
+    cmd=`git_fnc`
 
-git -C $repo $cmd
+    if [[ -z "$repo" || -z "$cmd" ]]; then
+        exit 0
+    fi
+
+    git -C $repo $cmd
+done
