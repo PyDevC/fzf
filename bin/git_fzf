@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# use fzf for selecting the repos from the desktop
+# and then select one, apply a command such as status, sync with remote, etc.
+
+local_repo(){ # searches the .git dir in $1
+    local repositories
+    repositories=`dirname $(find $1 -name ".git" -type d)`
+    echo $repositories | tr ' ' '\n'
+}
+
+repo_selection(){ # fzf selection from all_repo
+    local selected
+    local repo
+    repo=`local_repo $1`
+    selected=$( printf "$repo" | fzf +m --height 50% --style full --input-label ' Destination ' --preview 'tree -C {}')
+    echo $selected 
+}
+
+git_fnc(){
+    git_cmd=("status" "status -uno" "log" "commit" "add" "config")
+    selected=$( printf '%s\n' "${git_cmd[@]}" | fzf +m --height 50% --style full --input-label ' Destination ' --preview 'tree -C {}')
+    echo $selected
+}
+
+repo=`repo_selection $HOME`
+cmd=`git_fnc`
+
+if [[ -z "$repo" || -z "$cmd" ]]; then
+    exit 0
+fi
+
+git -C $repo $cmd
