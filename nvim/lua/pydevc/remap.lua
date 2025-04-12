@@ -2,7 +2,7 @@ vim.g.mapleader = " "
 
 
 local function map(mode, lhs, rhs, opt)
-	opts = opt or {}
+	local opts = opt or {}
 	opts.silent = true
 	vim.keymap.set(mode, lhs, rhs, opts)
 end
@@ -13,6 +13,7 @@ map({"i","c"}, "<C-c>", "<Esc>") -- changed my keybord keymappings to home row m
 -- Basic commands
 --map("n", "<leader>w", "<CMD>w<CR>")
 -- I am removing this habit but you can keep it. Just uncomment the above two lines
+-- got habit again with :w
 
 map({"n", "v"}, "<leader>y", [["+y]])
 
@@ -37,3 +38,4 @@ map("n", "<leader>k", "<cmd>lnext<CR>zz")
 map("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 map("n", "<leader>s", "<cmd>so<CR>")
+map("n", "<leader>x", "<cmd>!chmod +x %<CR>")
