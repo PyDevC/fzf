@@ -1,9 +1,9 @@
-# foreground               #e0def4
+# foreground               #bbbbc4
 # background               #191724
 # selection_foreground     #e0def4
 # selection_background     #403d52
-# cursor                   #524f67
-# cursor_text_color        #e0def4
+# cursor                   #161b30
+# cursor_text_color        #514f61
 # url_color                #c4a7e7
 # active_tab_foreground    #e0def4
 # active_tab_background    #26233a
@@ -12,35 +12,35 @@
 # active_border_color      #31748f
 # inactive_border_color    #403d52
 
-# black
-# color0   #26233a
-# color8   #6e6a86
+#black
+# color0   #23222e
+# color8   #8a6b4a
 
-# red
+#red
 # color1   #eb6f92
 # color9   #eb6f92
 
-# green
+#green
 # color2   #31748f
 # color10  #31748f
 
-# yellow
+#yellow
 # color3   #f6c177
 # color11  #f6c177
 
-# blue
+#blue
 # color4   #9ccfd8
 # color12  #9ccfd8
 
-# magenta
+#magenta
 # color5   #c4a7e7
 # color13  #c4a7e7
 
-# cyan
+#cyan
 # color6   #ebbcba
 # color14  #ebbcba
 
-# white
+#white
 # color7   #e0def4
 # color15  #e0def4
 
@@ -48,7 +48,7 @@ cursor_shape block
 font_family Geist Mono
 font_size 13.0
 dynamic_background_opacity yes
-background_opacity 0.7
+background_opacity 0.8
 
 
 # BEGIN_KITTY_THEME

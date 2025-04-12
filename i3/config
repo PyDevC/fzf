@@ -26,7 +26,7 @@ for_window [class=".*"] border pixel 1
 floating_modifier $mod
 
 #wallpapers
-exec --no-startup-id hsetroot -center ~/.wallpaper.jpg
+exec --no-startup-id hsetroot -center ~/wallpaper/.wallpaper2.jpg
 # picom
 exec --no-startup-id picom
 
