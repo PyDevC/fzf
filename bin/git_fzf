@@ -18,7 +18,7 @@ repo_selection(){ # fzf selection from all_repo
 }
 
 git_fnc(){
-    git_cmd=("status" "status -uno" "log" "commit" "add" "config")
+    git_cmd=("status" "status -uno" "log" "branch -vva" "commit" "add" "config")
     selected=$( printf '%s\n' "${git_cmd[@]}" | fzf +m --height 50% --style full --input-label ' Destination ' --preview 'tree -C {}')
     echo $selected
 }
