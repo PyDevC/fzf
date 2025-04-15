@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+if [[ -z $1 ]]; then
+    echo "no directory passed"
+    exit 0
+fi
+
+dir=$1
+
+if [[ ! -d "$PWD/$dir" ]]; then
+    echo "No such dir in $PWD"
+fi
+
+if [[ -d "$HOME/.config/$dir" ]]; then
+    read -p "directory already exists! Do you want to override [y/N]" action
+    if [[ $action == "y" || $action == "Y" ]]; then
+        rm -r $HOME/.config/$dir
+    else
+        echo Abort
+        exit 0
+    fi
+fi
+
+cp -r $PWD/$dir $HOME/.config/$dir
