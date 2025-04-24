@@ -104,12 +104,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-#Export bin
-export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
+. ~/.zsh_profile # source zsh_profile
 
-. ~/.zsh_profile
-
+# TODO: switch to cargo language servers
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

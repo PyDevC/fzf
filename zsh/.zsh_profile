@@ -11,13 +11,15 @@ export DOTFILES=$HOME/.dot
 export DEV_ENV=$HOME/build_desktop
 export EDITOR=$VIM
 
-addToPath() {
+addToPath() { 
+    # adds at the back of the path thus getting lower priority if something having same name is in front of the path
     if [[ "$PATH" != *"$1"* ]]; then
         export PATH=$PATH:$1
     fi
 }
 
-addToPathFront() {
+addToPathFront() { 
+    # useful when you want some thing like $HOME/bin to have more priority than $HOME/.dot/bin then which gets first in path get higher priority
     if [[ ! -z "$2" ]] || [[ "$PATH" != *"$1"* ]]; then
         export PATH=$1:$PATH
     fi
@@ -27,9 +29,10 @@ validateYaml() {
     python -c 'import yaml,sys;yaml.safe_load(sys.stdin)' < $1
 }
 
-addToPathFront $HOME/.dot/bin
+addToPath $HOME/.dot/bin
 addToPathFront $HOME/build_desktop/
 addToPathFront $HOME/.cargo/bin
+addToPath $HOME/bin
 
 bindkey -s ^f "tmux-sessionizer\n"
 bindkey -s ^a "tmux attach\n"

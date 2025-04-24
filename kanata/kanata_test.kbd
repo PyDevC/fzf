@@ -1,4 +1,9 @@
-;; defsrc is still necessary
+#|
+kanata config
+
+Use L_ctrl, Space, Escape
+|#
+
 (defcfg
   linux-dev (
     /dev/input/by-id/usb-SIGMACHIP_USB_Keyboard-event-if01
@@ -9,22 +14,47 @@
   process-unmapped-keys yes
 )
 
+(defvar
+  tap-time 100
+  hold-time 150
+)
+
 (defsrc
- q w e r t y u i o p 
- caps lsft rsft a s d f g h j k l ;
+q w e r t y u i o p 
+caps lsft rsft a s d f g h j k l ;
 z x c v b n m , .
 )
 
-(defvar
-  tap-time 200
-  hold-time 200
+#|
+There are two types of switching
+Toggle
+Layer Switch
+
+There are various types of tap interfaces:
+tap-hold
+tab-toggle
+tap-hold-release-timeout
+tap-hold-release-keys
+tap-hold-except-keys
+(defalias
+  ;; shifted keys
+  { S-[
+  } S-]
+  : S-;
+
+  ;; alias numbers as themselves for use in macro
+  8 8
+  0 0
 )
+;; `C-`, `A-`, `S-`, and `M-` for lctrl, lalt, lshift, lmeta, but are possible
+|#
 
 (defalias
+;; layers
 numlay (layer-switch num_mod) ;; switch to num layer
 norlay (layer-switch home_row) ;; switch to normal layer
 arrowlay (layer-switch arrow_mod) ;; switch to arrow layer
-numtog (layer-toggle num_mod)
+numtog (layer-toggle num_mod) ;; toggle to num layer
 
 ;; home row mods
   a (tap-hold $tap-time $hold-time a lmet)
@@ -51,14 +81,18 @@ numtog (layer-toggle num_mod)
   olay (tap-hold 1 20 _ @norlay)
   alay (tap-hold 1 20 _ @arrowlay)
 
+;; configure num row
+
 ;; special characters
+  ( (unicode "(" )
+  ) (unicode ")" )
   { S-[
   } S-]
-  | S-\
   ~ S-`
-
-  lp1 (unicode "(" )
-  rp1 (unicode ")" )
+  | S-\
+  at (unicode "@" )
+  ex (unicode "!" )
+  hs (unicode "!" )
 )
 
 (deflayer home_row
@@ -67,14 +101,8 @@ q w e r t y u i o p
 z x c v b n m , .
 )
 
-(deflayer num_mod
-@~ @| [ ] @{ @} @lp1 @rp1 , =
-@nlay @olay @alay @na @ns @nd @nf 5 6 @nj @nk @nl @nn
-- + \ [ ] { } ` /
-)
-
-(deflayer arrow_mod
-q w e r t y u up o p 
-@nlay @olay @alay @a @s @d @f _ _ left down rght @;
+(deflayer num_mod 
+@~ @| @at @hs @ex y u i o p 
+@nlay @olay @alay @a @s @d @f _ _ @j @k @l @;
 z x c v b n m , .
 )
