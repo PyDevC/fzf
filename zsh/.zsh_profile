@@ -44,6 +44,6 @@ alias cdf='cd $(fuzzy file)'
 alias gfzf='git_fzf'
 
 
-alias wach="find $HOME/wallpaper -name '*.jpg' -o -name '*.png' | rofi -dmenu | xargs hsetroot -center" # rofi wallpaper selector
+alias wach="find $HOME/wallpaper -name '*.jpg' -o -name '*.png' | rofi -dmenu | xargs hsetroot -fill" # rofi wallpaper selector
 alias penv='. $(find ~/personal/env/python -mindepth 1 -maxdepth 1 -type d | fzf)/bin/activate'
 # TODO: I just want to see the dir name not full path

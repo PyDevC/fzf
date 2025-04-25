@@ -12,6 +12,7 @@ bindsym Mod4+Mod1+s exec ~/.config/rofi/bin/menu_powermenu
 for_window [class=".*"] border pixel 0
 
 gaps outer 5
+gaps inner 5
 # class                 border  backgr. text    indicator child_border
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
@@ -29,8 +30,9 @@ gaps outer 5
 floating_modifier $mod
 
 #wallpapers
-exec --no-startup-id hsetroot -center ~/wallpaper/rough_mountain.jpg
+exec --no-startup-id hsetroot -center ~/wallpaper/purple_boat.jpg
 # picom
+exec --no-startup-id killall picom
 exec --no-startup-id picom
 
 #polybar
@@ -105,7 +107,7 @@ bindsym $mod+a focus parent
 exec --no-startup-id i3-msg 'workspace 1; exec thunar'
 exec --no-startup-id i3-msg 'workspace 2; exec firefox -P "normal"'
 exec --no-startup-id i3-msg 'workspace 4; exec kitty'
-exec --no-startup-id i3-msg 'workspace 5; exec htop'
+exec --no-startup-id i3-msg 'workspace 5; exec kitty --hold bash -c "htop"'
 exec --no-startup-id i3-msg 'workspace 7; exec firefox -P "work"'
 exec --no-startup-id i3-msg 'workspace 8; exec firefox -P "pytorch"'
 
