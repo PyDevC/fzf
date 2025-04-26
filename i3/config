@@ -30,7 +30,7 @@ gaps inner 5
 floating_modifier $mod
 
 #wallpapers
-exec --no-startup-id hsetroot -center ~/wallpaper/purple_boat.jpg
+exec --no-startup-id hsetroot -fill ~/wallpaper/purple_boat.jpg
 # picom
 exec --no-startup-id killall picom
 exec --no-startup-id picom
