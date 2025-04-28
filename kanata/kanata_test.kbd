@@ -9,14 +9,12 @@ Use L_ctrl, Space, Escape
     /dev/input/by-id/usb-SIGMACHIP_USB_Keyboard-event-if01
     /dev/input/by-id/usb-SIGMACHIP_USB_Keyboard-event-kbd
   )
-  linux-unicode-u-code u
-  linux-unicode-termination space
   process-unmapped-keys yes
 )
 
 (defvar
-  tap-time 100
-  hold-time 150
+  tap-time 200
+  hold-time 200
 )
 
 (defsrc
@@ -53,7 +51,6 @@ tap-hold-except-keys
 ;; layers
 numlay (layer-switch num_mod) ;; switch to num layer
 norlay (layer-switch home_row) ;; switch to normal layer
-arrowlay (layer-switch arrow_mod) ;; switch to arrow layer
 numtog (layer-toggle num_mod) ;; toggle to num layer
 
 ;; home row mods
@@ -78,31 +75,40 @@ numtog (layer-toggle num_mod) ;; toggle to num layer
 
 ;; configure the switch buttons these are same for every layer
   nlay (tap-hold 10 20 esc @numlay)
-  olay (tap-hold 1 20 _ @norlay)
-  alay (tap-hold 1 20 _ @arrowlay)
+  olay (tap-hold 10 20 _ @norlay)
 
 ;; configure num row
+1 1
+2 2 
+3 3 
+4 4 
+5 5 
+6 6
+7 7
+8 8
+9 9
+0 0
 
 ;; special characters
-  ( (unicode "(" )
-  ) (unicode ")" )
-  { S-[
-  } S-]
+  lp S-0
+  rp S-9
+  lb S-[
+  rb S-]
   ~ S-`
   | S-\
   at (unicode "@" )
   ex (unicode "!" )
-  hs (unicode "!" )
+  hs (unicode "#" )
 )
 
 (deflayer home_row
 q w e r t y u i o p 
-@nlay @olay @alay @a @s @d @f _ _ @j @k @l @;
+@nlay @olay @hs @a @s @d @f _ _ @j @k @l @;
 z x c v b n m , .
 )
 
 (deflayer num_mod 
-@~ @| @at @hs @ex y u i o p 
-@nlay @olay @alay @a @s @d @f _ _ @j @k @l @;
+@~ @| @lp @rp @lb @rb [ ] @at r
+@nlay @olay @hs @na @ns @nd @nf 5 6 @nj @nk @nl @nn
 z x c v b n m , .
 )

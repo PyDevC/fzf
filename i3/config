@@ -32,7 +32,6 @@ floating_modifier $mod
 #wallpapers
 exec --no-startup-id hsetroot -fill ~/wallpaper/purple_boat.jpg
 # picom
-exec --no-startup-id killall picom
 exec --no-startup-id picom
 
 #polybar
@@ -105,9 +104,9 @@ bindsym $mod+a focus parent
 
 # i3 automatic statup
 exec --no-startup-id i3-msg 'workspace 1; exec thunar'
-exec --no-startup-id i3-msg 'workspace 2; exec firefox -P "normal"'
+exec --no-startup-id i3-msg 'workspace 2; exec firefox -P "personal"'
 exec --no-startup-id i3-msg 'workspace 4; exec kitty'
-exec --no-startup-id i3-msg 'workspace 5; exec kitty --hold bash -c "htop"'
+exec --no-startup-id i3-msg 'workspace 5; exec ~/personal/softwares/MissionCenter-x86_64.AppImage'
 exec --no-startup-id i3-msg 'workspace 7; exec firefox -P "work"'
 exec --no-startup-id i3-msg 'workspace 8; exec firefox -P "pytorch"'
 

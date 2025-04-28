@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=Mission Center
+Exec=$HOME/personal/softwares/MissionCenter-x86_64.AppImage
+Type=Application
+Terminal=true
