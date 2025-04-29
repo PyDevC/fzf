@@ -11,8 +11,6 @@ bindsym Mod4+Mod1+s exec ~/.config/rofi/bin/menu_powermenu
 # Thanks Childz
 for_window [class=".*"] border pixel 0
 
-gaps outer 5
-gaps inner 5
 # class                 border  backgr. text    indicator child_border
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
@@ -36,6 +34,7 @@ exec --no-startup-id picom
 
 #polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+bindsym $mod+p exec $HOME/.config/polybar/toggle.sh
 
 # start a terminal
 bindsym $mod+Return exec "kitty"
