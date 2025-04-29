@@ -51,6 +51,7 @@ tap-hold-except-keys
 ;; layers
 numlay (layer-switch num_mod) ;; switch to num layer
 norlay (layer-switch home_row) ;; switch to normal layer
+arrowlay (layer-switch arrow_mod) ;; switch to arrow layer
 numtog (layer-toggle num_mod) ;; toggle to num layer
 
 ;; home row mods
@@ -75,7 +76,8 @@ numtog (layer-toggle num_mod) ;; toggle to num layer
 
 ;; configure the switch buttons these are same for every layer
   nlay (tap-hold 10 20 esc @numlay)
-  olay (tap-hold 10 20 _ @norlay)
+  olay (tap-hold 1 20 _ @norlay)
+  alay (tap-hold 1 20 _ @arrowlay)
 
 ;; configure num row
 1 1
@@ -96,19 +98,22 @@ numtog (layer-toggle num_mod) ;; toggle to num layer
   rb S-]
   ~ S-`
   | S-\
-  at (unicode "@" )
-  ex (unicode "!" )
-  hs (unicode "#" )
 )
 
 (deflayer home_row
 q w e r t y u i o p 
-@nlay @olay @hs @a @s @d @f _ _ @j @k @l @;
+@nlay @olay @alay @a @s @d @f _ _ @j @k @l @;
 z x c v b n m , .
 )
 
 (deflayer num_mod 
-@~ @| @lp @rp @lb @rb [ ] @at r
-@nlay @olay @hs @na @ns @nd @nf 5 6 @nj @nk @nl @nn
+@~ @| @lp @rp @lb @rb [ ] o p
+@nlay @olay @alay @na @ns @nd @nf 5 6 @nj @nk @nl @nn
+z x c v b n m , .
+)
+
+(deflayer arrow_mod
+q w e r t y u up o p 
+@nlay @olay @alay @a @s @d @f _ _ left down rght @;
 z x c v b n m , .
 )
