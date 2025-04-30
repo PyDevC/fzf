@@ -1,0 +1,13 @@
+## Applications
+- fonts
+- i3
+- icons
+- kitty
+- neovim
+- obs
+- picon
+- polybar
+- rofi
+- thunar
+- tmux
+- zsh

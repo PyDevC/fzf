@@ -1,7 +1,7 @@
 VIM="nvim"
 alias vim="nvim"
 
-PERSONAL=$HOME/personal
+PERSONAL=$HOME/personal # used in rare cases when I don't want to mention where my personal folder
 
 export XDG_CONFIG_HOME=$HOME/.config
 
@@ -26,8 +26,11 @@ addToPathFront() {
     fi
 }
 
-validateYaml() {
-    python -c 'import yaml,sys;yaml.safe_load(sys.stdin)' < $1
+validate() { 
+    # add more validations
+    if [[ "$1" == "yaml" ]]; then
+        python -c 'import yaml,sys;yaml.safe_load(sys.stdin)' < $2
+    fi
 }
 
 addToPath $HOME/.dot/bin
@@ -45,5 +48,5 @@ alias cdf='cd $(fuzzy file)'
 alias gfzf='git_fzf'
 
 
-alias wach="find $HOME/wallpaper -name '*.jpg' -o -name '*.png' | rofi -dmenu -theme $HOME/.config/rofi/launchers/colorful/style_9.rasi | xargs hsetroot -fill" # rofi wallpaper selector
+alias wach="find $HOME/wallpaper -name '*.jpg' -exec basename {} \; | rofi -dmenu -theme $HOME/.config/rofi/launchers/colorful/style_9.rasi | xargs -i hsetroot -fill $HOME/wallpaper/{}"  # rofi wallpaper selector
 alias penv='. ~/personal/env/python/$(find ~/personal/env/python -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | fzf)/bin/activate'

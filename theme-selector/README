@@ -1,1 +1,7 @@
 make sure you set your cursor color to #5e616b
+
+To use this run gogh
+```
+export TERMINAL=kitty
+./gogh
+```

@@ -7,6 +7,7 @@ font pango:Geist 12
 
 bindsym Mod4+Mod1+q [class=".*"] kill
 bindsym Mod4+Mod1+s exec ~/.config/rofi/bin/menu_powermenu
+
 # GET DEM BORDERS OUT OF HEREc:w
 # Thanks Childz
 for_window [class=".*"] border pixel 0
