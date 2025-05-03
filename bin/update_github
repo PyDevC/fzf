@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+for dir in $(ls ~/personal/github); do
+    echo $dir
+    echo "fetching..."
+    git -C ~/personal/github/$dir switch main
+    git -C ~/personal/github/$dir switch master
+    git -C ~/personal/github/$dir fetch
+    git -C ~/personal/github/$dir pull
+    echo "done.."
+done
