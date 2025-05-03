@@ -6,3 +6,5 @@
 - check what's mate
 - configure neovim for dap
 - shifting neovim lsp from nodejs to rust(cargo)
+- install some fun cli tools (jp2a, cowsay, neofetch, figlet, fortune)
+- rewrite update_github to allow grep filtering and other filters
