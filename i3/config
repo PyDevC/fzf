@@ -29,7 +29,7 @@ for_window [class=".*"] border pixel 0
 floating_modifier $mod
 
 #wallpapers
-exec --no-startup-id hsetroot -fill ~/wallpaper/purple_boat.jpg
+exec --no-startup-id hsetroot -fill ~/wallpaper/pc_split.jpg
 # picom
 exec --no-startup-id picom
 
@@ -39,6 +39,8 @@ bindsym $mod+p exec $HOME/.config/polybar/toggle.sh
 
 # start a terminal
 bindsym $mod+Return exec "kitty"
+bindsym $mod+B exec brave-browser
+
 
 bindsym $mod+Shift+q kill
 
@@ -46,6 +48,7 @@ bindsym $mod+Shift+q kill
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+d exec ~/.config/rofi/bin/launcher_colorful
 bindsym $mod+c exec ~/.config/rofi/rofi-wifi-menu.sh
+bindsym $mod+Shift+b exec rofi -dmenu -p "Search> " -theme $HOME/.config/rofi/launchers/colorful/style_9.rasi | xargs -I{} xdg-open https://search.brave.com/search?q={\}
 
 # screenshot 
 bindsym $mod+n exec ~/.config/rofi/bin/applet_screenshot
@@ -104,11 +107,8 @@ bindsym $mod+a focus parent
 
 # i3 automatic statup
 exec --no-startup-id i3-msg 'workspace 1; exec thunar'
-exec --no-startup-id i3-msg 'workspace 2; exec firefox -P "personal"'
 exec --no-startup-id i3-msg 'workspace 4; exec kitty'
 exec --no-startup-id i3-msg 'workspace 5; exec ~/personal/softwares/MissionCenter-x86_64.AppImage'
-exec --no-startup-id i3-msg 'workspace 7; exec firefox -P "work"'
-exec --no-startup-id i3-msg 'workspace 8; exec firefox -P "pytorch"'
 
 # # switch to workspace
 bindsym $mod+1 workspace 1

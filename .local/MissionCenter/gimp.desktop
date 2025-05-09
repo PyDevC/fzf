@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Gimp
+Exec=./personal/softwares/GIMP-3.0.2-x86_64.AppImage
+Icon=./personal/softwares/icons/io.missioncenter.MissionCenter.svg
+Type=Application
+Categories=GTK;GNOME;Utility;

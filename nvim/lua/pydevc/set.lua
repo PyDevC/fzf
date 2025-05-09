@@ -5,7 +5,6 @@ vim.opt.autoindent = true
 vim.opt.backup = false
 vim.opt.clipboard = "unnamed"
 vim.opt.colorcolumn = "80"
-vim.opt.conceallevel = 1
 vim.opt.expandtab = true
 vim.opt.guicursor = "a:blinkon100" -- global
 vim.opt.hlsearch = false

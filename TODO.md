@@ -8,3 +8,4 @@
 - shifting neovim lsp from nodejs to rust(cargo)
 - install some fun cli tools (jp2a, cowsay, neofetch, figlet, fortune)
 - rewrite update_github to allow grep filtering and other filters
+- A notification system that notifies if a build is complete or if a process is completed in terminal
