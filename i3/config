@@ -38,7 +38,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 bindsym $mod+p exec $HOME/.config/polybar/toggle.sh
 
 # start a terminal
-bindsym $mod+Return exec "kitty"
+bindsym $mod+Return exec "ghostty"
 bindsym $mod+B exec brave-browser
 
 
@@ -107,7 +107,7 @@ bindsym $mod+a focus parent
 
 # i3 automatic statup
 exec --no-startup-id i3-msg 'workspace 1; exec thunar'
-exec --no-startup-id i3-msg 'workspace 4; exec kitty'
+exec --no-startup-id i3-msg 'workspace 4; exec ghostty'
 exec --no-startup-id i3-msg 'workspace 5; exec ~/personal/softwares/MissionCenter-x86_64.AppImage'
 
 # # switch to workspace

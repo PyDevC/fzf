@@ -36,7 +36,7 @@ validate() {
 addToPath $HOME/.dot/bin
 addToPathFront $HOME/build_desktop/
 addToPathFront $HOME/.cargo/bin
-addToPath $HOME/bin
+addToPathFront $HOME/bin
 
 bindkey -s ^f "tmux-sessionizer\n"
 bindkey -s ^a "tmux attach\n"
