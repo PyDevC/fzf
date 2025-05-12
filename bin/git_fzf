@@ -3,6 +3,8 @@
 # use fzf for selecting the repos from the desktop
 # and then select one, apply a command such as status, sync with remote, etc.
 
+load_all="0"
+
 local_repo(){ # searches the .git dir in $1
     if [ -z $REPOS ]; then
         export REPOS="$(dirname $(find $1 -name ".git" -type d))"
@@ -24,6 +26,23 @@ git_fnc(){
     selected=$( printf '%s\n' "${git_cmd[@]}" | fzf +m --height 50% --style full --input-label ' Destination ' --preview 'tree -C {}')
     echo $selected
 }
+
+
+while [[ $# -gt 0 ]];do
+    if [[ $1 == "--load-all" ]];then
+        load_all="1"
+    fi
+    shift
+done
+
+
+if [[ $load_all == "1" ]];then
+    for repo in $(local_repo $HOME); do
+        echo $repo
+        git -C $repo --no-pager branch -vva 
+    done
+    exit 0
+fi
 
 repo=`repo_selection $HOME`
 cmd="cmd"
