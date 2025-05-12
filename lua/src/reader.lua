@@ -1,0 +1,5 @@
+-- reades the events and get those events identified using events.lua
+-- read the keystrokes
+-- read the mouse movements
+-- read the request kill
+-- read the backspace triggering to start a new matcher
