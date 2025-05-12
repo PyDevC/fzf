@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+p=$1
+grep_flags="--color=auto --exclude-dir={.bzr,cvs,.git,.hg,.svn,.idea,.tox}"
+
+while true; do 
+    sync
+    cat /proc/$p/status | grep $grep_flags VmRSS | grep $grep_flags -o '[0-9]\+' | awk '{print $1/1024 " MB"}'
+    sleep 1
+done
