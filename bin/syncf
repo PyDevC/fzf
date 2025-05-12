@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+dry_run="0"
+
+if [[ -z $XDG_CONFIG_HOME ]]; then
+    # This probably won't happen cause I have $XDG_CONFIG_HOME defined in the .zsh_profile in my dotfiles
+    echo "XDG_CONFIG_HOME not present"
+    echo "using ~/.config instead"
+    XDG_CONFIG_HOME="$HOME/.config"
+fi
+
+
+log() {
+    if [[ $dry_run == "1" ]]; then
+        echo "[DRY_RUN]: $1"
+    else
+        echo "$1"
+    fi
+}
+
+sync-config(){
+    log "copying files to $XDG_CONFIG_HOME from: $1"
+    pushd $1 &> /dev/null
+    (
+        configs=`find . -mindepth 1 -maxdepth 1 -type d`
+        echo $configs
+        for c in $configs; do
+            directory=${2%/}/${c#./}
+
+            log "removing: rm -rf $directory"
+            if [[ $dry_run == "0" ]]; then
+                rm -rf $directory
+            fi
+
+            log "copying env: cp -r $c $2"
+            if [[ $dry_run == "0" ]]; then
+                cp -r ./$c $2
+            fi
+        done
+
+    )
+    popd &> /dev/null
+}
+
+if [[ $1 == "--dry-run" ]]; then
+    dry_run="1"
+fi
+
+sync-config ~/.dot/config $XDG_CONFIG_HOME
