@@ -1,0 +1,62 @@
+-- handles everything about paths
+--
+
+-- load libraries
+local utils = require('src.utils.sysinfo')
+
+local string_byte = string.byte
+
+
+local M = {}
+
+M.separator_byte = {
+    dot = string_byte('.'),
+    semi_colon = string_byte(';'),
+    colon = string_byte(':'),
+    fslash = string_byte('/'),
+    bslash = string_byte('\\'),
+    newline = string_byte('\n')
+}
+
+---@param input string
+---@param sep string
+---@return string
+--Checks the separator to be used in input
+--automatically check if the input is path or not
+function M.separator(input, sep)
+    sep = sep or get_separator(input)
+    if type(sep) == "number" then
+        sep = string.char(sep)
+    end
+    return sep
+end
+
+---@param input string
+---@return integer
+--Get numerical code of separator as a path or string
+--default input (with path == false) = newline '\n'
+function get_separator(input)
+    if check_path(input) == true then
+        if utils.__OS == 'linux' then
+            return M.separator_byte.fslash
+        end
+        return M.separator_byte.bslash
+    else
+        return M.separator_byte.newline
+    end
+end
+
+---@param input string
+---@return boolean
+---Check if the input is a path or not
+function check_path(input)
+    local separ = { string_byte(input, 3), string_byte(input, 3) }
+    for _,s in ipairs(separ) do
+        if s == M.separator_byte.bslash or s == M.separator_byte.fslash then
+            return true
+        end
+    end
+    return false
+end
+
+return M
