@@ -50,8 +50,25 @@ end
 ---@return boolean
 ---Check if the input is a path or not
 function check_path(input)
-    local separ = { string_byte(input, 3), string_byte(input, 3) }
-    for _,s in ipairs(separ) do
+    if check_separator_front(input) or check_separator_end(input) then
+        return true
+    end
+    return false
+end
+
+function check_separator_front(input)
+    local separ = { string_byte(input, 3), string_byte(input, 2) } -- TODO: also check for home/user/Desktop
+    for _, s in ipairs(separ) do
+        if s == M.separator_byte.bslash or s == M.separator_byte.fslash then
+            return true
+        end
+    end
+    return false
+end
+
+function check_separator_end(input)
+    local separ = { string_byte(input, -3), string_byte(input, -2), string_byte(input, -1) } -- TODO: also check for home/user/Desktop
+    for _, s in ipairs(separ) do
         if s == M.separator_byte.bslash or s == M.separator_byte.fslash then
             return true
         end
