@@ -24,7 +24,6 @@ return {
             local lspconfig = require "lspconfig"
 
             local servers = {
-                bashls = true,
                 lua_ls = true,
                 pyright = true,
 

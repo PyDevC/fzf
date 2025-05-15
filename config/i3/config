@@ -12,6 +12,8 @@ bindsym Mod4+Mod1+s exec ~/.config/rofi/bin/menu_powermenu
 # Thanks Childz
 for_window [class=".*"] border pixel 0
 
+mouse_warping none
+
 # class                 border  backgr. text    indicator child_border
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
@@ -39,7 +41,7 @@ bindsym $mod+p exec $HOME/.config/polybar/toggle.sh
 
 # start a terminal
 bindsym $mod+Return exec "ghostty"
-bindsym $mod+B exec brave-browser
+bindsym $mod+B exec $HOME/personal/softwares/zen/zen
 
 
 bindsym $mod+Shift+q kill
@@ -48,7 +50,7 @@ bindsym $mod+Shift+q kill
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+d exec ~/.config/rofi/bin/launcher_colorful
 bindsym $mod+c exec ~/.config/rofi/rofi-wifi-menu.sh
-bindsym $mod+Shift+b exec rofi -dmenu -p "Search> " -theme $HOME/.config/rofi/launchers/colorful/style_9.rasi | xargs -I{} xdg-open https://search.brave.com/search?q={\}
+bindsym $mod+Shift+b exec ~/.dot/bin/search
 
 # screenshot 
 bindsym $mod+n exec ~/.config/rofi/bin/applet_screenshot

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Configuration
+BROWSER="zen"  # Replace with your preferred browser (e.g., chromium, google-chrome)
+SEARCH_ENGINE="https://google.com/?q="  # Replace with your preferred search engine (e.g., https://www.google.com/search?q=)
+
+INPUT=$(rofi -dmenu -p "Run or Search: ")
+
+# Check if Rofi was exited without selection (e.g., Esc key)
+if [ -z "$INPUT" ]; then
+    exit 0
+fi
+
+$BROWSER "${SEARCH_ENGINE}${INPUT}" &

@@ -37,6 +37,7 @@ addToPath $HOME/.dot/bin
 addToPathFront $HOME/build_desktop/
 addToPathFront $HOME/.cargo/bin
 addToPathFront $HOME/bin
+addToPath $HOME/personal/softwares/zen/
 
 bindkey -s ^f "tmux-sessionizer\n"
 bindkey -s ^a "tmux attach\n"

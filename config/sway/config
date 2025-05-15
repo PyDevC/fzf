@@ -12,7 +12,7 @@ set $right l
 
 # Your preferred terminal emulator
 # hard decision to switch to ghostty afterwards
-set $term kitty
+set $term ghostty
 
 # Your preferred application launcher
 set $menu rofi -show drun
@@ -20,10 +20,7 @@ set $menu rofi -show drun
 # File Manager
 set $file-manager thunar
 
-
-
-set $web-browser firefox
-set $browser brave-bin
+set $web-browser ~/personal/softwares/zen/zen
 
 # lock screen
 set $lock 'swaylock \
@@ -46,6 +43,22 @@ set $lock 'swaylock \
     --indicator-radius 100 \
     --indicator-thickness 10 \
     --font "Iosevka Nerd Font Mono"'
+
+### OBS Fixes and XDG Desktop
+
+# Set XDG_CURRENT_DESKTOP for proper Wayland support
+exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+
+# Start xdg-desktop-portal services (ensure wlr starts first)
+exec --no-startup-id /usr/lib/xdg-desktop-portal-wlr &
+exec --no-startup-id /usr/lib/xdg-desktop-portal -r
+
+
+
+### Sov
+
+exec rm -f /tmp/sovpipe && mkfifo /tmp/sovpipe && tail -f /tmp/sovpipe | sov -t 500
 
 # Everforest colors
 #set $bg0  #2d353b
@@ -126,11 +139,8 @@ font pango:Inconsolata LGC Nerd Font Mono 12
 ## Waybar
 exec waybar
 
-## SWWW Wallpaper Daemon
-exec swww-daemon
-
-## SWWW Random Wallpaper
-exec bash -c 'swww img "$(find ~/wallpapers-extra/flowers -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" \) | shuf -n1)" -t none'
+## Wallpaper
+exec swaybg -m fill -i ~/wallpaper/pc_split.jpg
 
 ## Autostart Applications
 
@@ -152,20 +162,12 @@ for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, move position 
     # Start a terminal
     bindsym $mod+Return exec $term
 
-    # Clipboard
-    bindsym $mod+v exec cliphist list | rofi -dmenu -p "Clipboard" -theme ~/.config/rofi/launchers/colorful/style_9.rasi | cliphist decode | xclip
-
-    # Lock
-    bindsym $mod+shift+t exec $lock
-
-    # Tiling Modes
-    bindsym $mod+u exec ~/.config/sway/scripts/tiling.sh
-
     # Reload Waybar
     bindsym $mod+p exec killall -SIGUSR1 waybar
 
     # Call the browser variable and launch it with $mod+b
     bindsym $mod+b exec $web-browser
+    bindsym $mod+Shift+b exec ~/.dot/bin/search
 
     # Kill focused window
     bindsym $mod+Shift+q kill
@@ -328,44 +330,22 @@ bindsym $mod+r mode "resize"
     # Special key to take a screenshot with grim
     bindsym Print exec flameshot gui
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-##bar {
-#   position top
-
-#    # When the status_command prints a new line to stdout, swaybar updates.
-#    # The default just shows the current date and time.
-  #status_command ~/.config/sway/scripts/status.sh
-
-
- #colors {
-  #  statusline $fg
-   #     background $bg0
-    #    inactive_workspace $bg0 $bg0 $bg1
-     #   focused_workspace $orange $bg1 $orange
-
-   #}
- #}
-
-
 # Focused window (active)
 client.focused $cyan $bg1 $fg $yellow $cyan
 
 # Unfocused window (inactive)
 client.unfocused $bg0 $bg1 $gray $bg0 $bg1
 
+
 # Urgent window (e.g., alerts)
 client.urgent $yellow $bg1 $fg $yellow $yellow
 
 
+gaps inner 5
+
 # Borders and Gaps.
 
-gaps inner 4
-gaps outer 4
-
-default_border pixel 2
+default_border pixel 0
 
 titlebar_padding 8 2
-titlebar_border_thickness 2
+titlebar_border_thickness 0
