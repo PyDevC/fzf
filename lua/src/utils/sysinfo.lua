@@ -4,12 +4,12 @@
 --
 -- check the version of os, arch, os name, etc.
 
-local getenv = os.getenv
-local execute = os.execute
+local arch = jit.arch
+local os = jit.os
 
 local M = {}
 
-M.__ARCH = execute('arch')
-M.__OS = execute('')
+M.__ARCH = arch
+M.__OS = os
 
 return M
