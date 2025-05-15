@@ -14,11 +14,13 @@ M.EventBox = {
     ignore = nil
 }
 
----@param EventBox table
 ---@param Event table
+---@return table
 --Creates a new EventBox with a single event to it
-function NewEventBox(EventBox, Event)
+function M.NewEventBox(Event)
+    local EventBox = M.EventBox
     EventBox.events = { Event.Event }
+    return EventBox
 end
 
 ---@param EventBox table
@@ -26,7 +28,7 @@ end
 --Puts the EventBox into waiting queue
 --All the events inside EventBox will stop and wait till released
 --If the EventBox has interupt in it then it command to kills all the event
-function Wait(EventBox)
+function M.Wait(EventBox)
     if EventBox.interupt then
         Kill(EventBox)
     end
@@ -34,13 +36,12 @@ function Wait(EventBox)
     return 0
 end
 
----@param EventBox table
---Releases the first event that was inserted
-function Release(EventBox)
+--Releases the first event from wait queue
+function M.Release()
     table.remove(M.WaitQueue, 0)
 end
 
-function Kill(EventBox)
+function M.Kill(EventBox)
     if EventBox.interupt then
         EventBox = nil
         M.WaitQueue = nil

@@ -1,3 +1,5 @@
+local events = require('src.events')
+
 local M = {}
 
 M.Matcher = {
@@ -18,12 +20,15 @@ end
 function M.Search(Matcher)
     local start = true
     local stop = false
-    local ReadEvent = NewEvent('reader') -- TODO: Create this function to create a new event in event.lua
 
-    local input = ReadEvent.read()
+    -- search table
+    local search = events.NewEvent('search') -- TODO: create a search or we create a simeple
 
-    while true do
-        ReadEvent.Wait() -- wait for other events to interupt or wait until the search is complete
+    local SearchBox = events.NewEventBox(search)
+
+    local success = Wait(SearchBox)
+    if success then
+        LaunchParallel() -- launches the search in parallel with other Events
     end
 end
 
