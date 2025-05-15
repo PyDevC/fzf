@@ -23,6 +23,12 @@ function M.NewEventBox(Event)
     return EventBox
 end
 
+---@return table
+function M.NewEvent()
+    local Event = M.Event
+    return Event
+end
+
 ---@param EventBox table
 ---@return integer
 --Puts the EventBox into waiting queue
