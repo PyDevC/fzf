@@ -29,7 +29,7 @@ addToPathFront() {
 validate() { 
     # add more validations
     if [[ "$1" == "yaml" ]]; then
-        python -c 'import yaml,sys;yaml.safe_load(sys.stdin)' < $2
+        python3 -c 'import yaml,sys;yaml.safe_load(sys.stdin);sys.stdout.write()' < $2
     fi
 }
 

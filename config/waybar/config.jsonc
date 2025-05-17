@@ -13,7 +13,7 @@
         "cpu",
         "memory",
         "tray",
-        "custom/lock",
+        "custom/lock"
     ],
     "sway/workspaces": {
         "format": "{name}: {icon}",

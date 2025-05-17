@@ -168,6 +168,7 @@ for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, move position 
     # Call the browser variable and launch it with $mod+b
     bindsym $mod+b exec $web-browser
     bindsym $mod+Shift+b exec ~/.dot/bin/search
+    bindsym $mod+c exec ~/.config/rofi/rofi-wifi-menu.sh
 
     # Kill focused window
     bindsym $mod+Shift+q kill
