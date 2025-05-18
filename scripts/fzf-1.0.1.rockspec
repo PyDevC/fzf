@@ -13,8 +13,6 @@ description = {
 
 dependencies = {
    'lua >= 5.1',
-   'penlight == 1.14',
-    'lanes >= 3.17',
 }
 
 source = {
