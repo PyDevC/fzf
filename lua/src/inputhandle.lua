@@ -1,11 +1,5 @@
--- handles everything about paths
---
-
--- load libraries
 local utils = require('src.utils.sysinfo')
-
 local string_byte = string.byte
-
 
 local M = {}
 
@@ -35,12 +29,14 @@ end
 ---@return integer
 --Get numerical code of separator as a path or string
 --default input (with path == false) = newline '\n'
-function get_separator(input)
+local get_separator = function(input)
     if check_path(input) == true then
-        if utils.__OS == 'linux' then
+        if utils.__OS == 'Linux' then
             return M.separator_byte.fslash
         end
         return M.separator_byte.bslash
+    elseif check_separator_end(input) and check_separator_front(input) then
+        return M.separator_byte.fslash
     else
         return M.separator_byte.newline
     end
