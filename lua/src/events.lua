@@ -2,56 +2,58 @@ local exit = os.exit
 
 local M = {}
 
-M.Event = {
-    EventType = 0,
-}
+M.Event = {}
 
-M.WaitQueue = {} -- in executor check whether the event box is in wait or not
+M.WaitQueue = {}
 
 M.EventBox = {
-    events = nil,     -- can be one or more events
-    interupt = false, -- if an event if active in the event box that could interupt all processes
-    ignore = nil
+    events = {},
+    interupt = false,
+    ignore = nil,
+    is_waiting = false
 }
 
 ---@param Event table
----@return table
 --Creates a new EventBox with a single event to it
-function M.NewEventBox(Event)
-    local EventBox = M.EventBox
-    EventBox.events = { Event.Event }
-    return EventBox
+function M.EventBox:new(Event)
+    local NewEventBox = {
+        events = getevents(), -- TODO: Add getevents
+    }
+    self.__index = self
+
+    setmetatable(NewEventBox, self)
 end
 
----@return table
-function M.NewEvent()
-    local Event = M.Event
-    return Event
+function M.Event:new()
+    local NewEvent= {} -- TODO: implement later
+
+    self.__index = self
+
+    setmetatable(NewEvent, self)
 end
 
----@param EventBox table
 ---@return integer
 --Puts the EventBox into waiting queue
 --All the events inside EventBox will stop and wait till released
 --If the EventBox has interupt in it then it command to kills all the event
-function M.Wait(EventBox)
-    if EventBox.interupt then
-        Kill(EventBox)
+function M.EventBox:Wait()
+    if M.EventBox.interupt then
+        M.EventBox:Kill()
     end
-    table.insert(M.WaitQueue, EventBox)
+    table.insert(M.WaitQueue, M.EventBox)
     return 0
 end
 
 --Releases the first event from wait queue
-function M.Release()
+function M.EventBox:Release()
     table.remove(M.WaitQueue, 0)
 end
 
-function M.Kill(EventBox)
-    if EventBox.interupt then
-        EventBox = nil
-        M.WaitQueue = nil
-        exit(1)
+--Kill the EventBox to end all processes within
+function M.EventBox:Kill()
+    if M.EventBox.interupt then
+        M.EventBox:Release()
+        M.EventBox = {}
     end
 end
 
