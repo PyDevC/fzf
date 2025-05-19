@@ -1,8 +1,11 @@
+# fzf
+
 my own version of fzf written in lua
 
-writing fzf again just for fun
+## Author's note
+Thanks to junegunn we have a wonderful tool.
 
-## How does match request works
-Match request is supplied by some other function A match request gets some words our goad is to break that into chunk and perform fzf on each chunk
-
-chunks are divided on the basis of a seperator just like in python
+I love to use fuzzy finder in my bash scripts, most of my scripts have use of fzf.
+Not to forget we have our tmux-sessionizer another great script written by [ThePrimeagen](http://github.com/ThePrimeagen),
+which makes it easier to create sessions from any directory in your system.
+Perfect use of tmux and fzf I would say.
