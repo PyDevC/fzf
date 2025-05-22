@@ -1,10 +1,8 @@
-local exit = os.exit
-
 local M = {}
 
-M.Event = {}
-
 M.WaitQueue = {}
+
+-- EventBox
 
 M.EventBox = {
     events = {},
@@ -13,23 +11,12 @@ M.EventBox = {
     is_waiting = false
 }
 
----@param Event table
---Creates a new EventBox with a single event to it
 function M.EventBox:new(Event)
-    local NewEventBox = {
-        events = getevents(), -- TODO: Add getevents
-    }
+    local NewEventBox = {}
     self.__index = self
 
     setmetatable(NewEventBox, self)
-end
-
-function M.Event:new()
-    local NewEvent= {} -- TODO: implement later
-
-    self.__index = self
-
-    setmetatable(NewEvent, self)
+    return NewEventBox
 end
 
 ---@return integer
@@ -37,10 +24,11 @@ end
 --All the events inside EventBox will stop and wait till released
 --If the EventBox has interupt in it then it command to kills all the event
 function M.EventBox:Wait()
-    if M.EventBox.interupt then
-        M.EventBox:Kill()
+    if self.interupt then
+        self:Kill()
     end
-    table.insert(M.WaitQueue, M.EventBox)
+    table.insert(M.WaitQueue, self)
+    self.is_waiting = true
     return 0
 end
 
@@ -51,10 +39,41 @@ end
 
 --Kill the EventBox to end all processes within
 function M.EventBox:Kill()
-    if M.EventBox.interupt then
-        M.EventBox:Release()
-        M.EventBox = {}
+    if self.interupt then
+        self:Release()
+        self = {}
     end
+end
+
+-- Events
+
+M.Event = { type = nil }
+
+M.EventType = {
+    ReadEvent = 0,
+    SearchEvent = 1,
+    MatchEvent = 2,
+    GhostTextEvent = 3,
+}
+
+function M.Event:new(type)
+    local isvalidtype
+    for _, eventtype in ipairs(M.EventType) do
+        print(eventtype)
+        if eventtype == type then
+            isvalidtype = true
+        end
+    end
+
+    NewEvent = M.Event
+    if isvalidtype then
+        NewEvent = { type = type }
+    end
+
+    self.__index = self
+
+    setmetatable(NewEvent, self)
+    return NewEvent
 end
 
 return M

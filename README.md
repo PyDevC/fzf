@@ -2,6 +2,10 @@
 
 my own version of fzf written in lua
 
+## Future plans
+Create a terminal auto-complete with this fzf.
+Using Ollama and a custom algorithm for best next token prediction.
+
 ## Author's note
 Thanks to junegunn we have a wonderful tool.
 

@@ -3,6 +3,10 @@ local string_byte = string.byte
 
 local M = {}
 
+M.delimiterChars = "/,:;|"
+
+M.whiteChars = " \t\n\v\f\r\x85\xA0"
+
 M.separator_byte = {
     dot = string_byte('.'),
     semi_colon = string_byte(';'),
