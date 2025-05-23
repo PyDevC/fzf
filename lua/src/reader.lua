@@ -1,4 +1,7 @@
 local read = io.read
+local timeit = os.clock
+local curses = require('curses')
+local stirng = string
 
 local M = {}
 
@@ -11,32 +14,44 @@ M.Reader = {
 function M.Reader:read_pattern()
     local start = 0
     local lap = 0
+    local waitbefore = 0
+    local waitafter = 0
+    local wait = 0
     local pattern = ""
+    local time = 0
     print("read pattern")
+
+    curses.initscr()
+    local stdscr = curses.stdscr()
+
     while true do
-        local time = lap - start
-        local input = read(1)
-        pattern = pattern .. input
-        -- check if input contains any interupts
-        if time == 2 then
-            -- pass this whole input to new matcher
-            start = 0
+        waitbefore = timeit()
+        print(waitbefore)
+
+        local ch = stdscr:getch()
+
+        waitafter = timeit()
+        print(waitafter)
+
+        wait = waitbefore + waitafter
+
+        print(wait)
+        if ch ~= -1 then
+            pattern = pattern .. stirng.char(ch)
+        end
+
+        curses.napms(50) -- Sleep for a short while to reduce CPU usage
+
+        lap = lap + wait + timeit()
+        time = lap - start
+        if time > 0.2 then
+            curses.endwin()
+            print(time)
             return pattern
         end
-        lap = lap + 1
     end
-end
 
-function M.Reader:files()
-    local filepath = read() -- reads file from terminal this will be later changed when we develop cli
-    local file = read(10)
-    return file
-end
-
-function M.Reader:stdin()
-end
-
-function M.Reader:API()
+    curses.endwin()
 end
 
 return M
